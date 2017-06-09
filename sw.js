@@ -83,8 +83,11 @@ self.addEventListener('fetch', function(event) {
 
           }
         }else{
-            fetch(event.request).catch(function() {
-            return caches.match(event.request);
+            return caches.match(event.request).then(function (response) {
+              return response || fetch(event.request).then(function(response) {
+                cache.put(event.request, response.clone());
+                return response;
+              })
             })
         }
       })
