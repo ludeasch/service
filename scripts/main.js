@@ -139,13 +139,15 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
     console.error('Service Worker Error', error);
   });
   if (navigator.onLine){
-     cache.matchAll('https://trim-mode-139918.firebaseio.com/').then(function(response) {
-            response.forEach(function(element, index, array) {
-              console.log(element)
-              event.respondWith(element)
-              cache.delete(element);
-            });
-    })
+     caches.open("prefetch-cache-v2").then(function(cache) {
+       cache.matchAll('https://trim-mode-139918.firebaseio.com/').then(function(response) {
+              response.forEach(function(element, index, array) {
+                console.log(element)
+                event.respondWith(element)
+                cache.delete(element);
+              });
+      })
+   })
   }
 } else {
   console.warn('Push messaging is not supported');
