@@ -143,7 +143,8 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
        cache.matchAll('https://trim-mode-139918.firebaseio.com/').then(function(response) {
               response.forEach(function(element, index, array) {
                 console.log(element)
-                event.respondWith(element)
+                console.log("request offline")
+                fetch(element)
                 cache.delete(element);
               });
       })
