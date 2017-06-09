@@ -82,10 +82,11 @@ self.addEventListener('fetch', function(event) {
                 return cache.add(event.request)
 
           }
+        }else{
+            fetch(event.request).catch(function() {
+            return caches.match(event.request);
+            })
         }
       })
   )
-
-
-
 });
