@@ -83,7 +83,7 @@ self.addEventListener('fetch', function(event) {
 
           }else{
               return fetch(event.request)
-            })
+            }
           }
 
         }else{
