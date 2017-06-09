@@ -82,8 +82,7 @@ self.addEventListener('fetch', function(event) {
                 return cache.add(event.request)
 
           }else{
-             return caches.match(event.request).then(function (response) {
-              return response
+              return event.request
             })
           }
 
