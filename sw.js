@@ -82,7 +82,7 @@ self.addEventListener('fetch', function(event) {
                 return cache.add(event.request)
 
           }else{
-              return event.request
+              return fetch(event.request)
             })
           }
 
