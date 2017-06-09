@@ -72,31 +72,20 @@ self.addEventListener('activate', function(event) {
 
 
 
-//self.addEventListener('fetch', function(event) {
-  //console.log(event.request.url);
-  //event.respondWith(
-      //caches.open(CURRENT_CACHES).then(function(cache) {
-        //if(event.request.url.includes("https://trim-mode-139918.firebaseio.com")){
-          //if(!navigator.onLine){
-                //console.log("mira")
-                //return cache.add(event.request)
-//
-          //}else{
-//
-//
-            //return cache.match(event.request).then(function (response) {
-              //return response || fetch(event.request).then(function(response) {
-                //cache.put(event.request, response.clone());
-                //return response;
-              //})
-//
-//
-            //})
-          //}
-        //}
-      //})
-  //)
-//
-//
-//
-//});
+self.addEventListener('fetch', function(event) {
+  console.log(event.request.url);
+  event.respondWith(
+      caches.open(CURRENT_CACHES).then(function(cache) {
+        if(event.request.url.includes("https://trim-mode-139918.firebaseio.com")){
+          if(!navigator.onLine){
+                console.log("mira")
+                return cache.add(event.request)
+
+          }
+        }
+      })
+  )
+
+
+
+});
