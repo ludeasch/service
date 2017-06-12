@@ -75,7 +75,7 @@ self.addEventListener('activate', function(event) {
 self.addEventListener('fetch', function(event) {
   console.log(event.request.method);
   event.respondWith(
-      //caches.open(CURRENT_CACHES).then(function(cache) {
+      caches.open(CURRENT_CACHES).then(function(cache) {
         //if(event.request.url.includes("chabot")){
            //return fetch(event.request)
         //}
@@ -102,6 +102,6 @@ self.addEventListener('fetch', function(event) {
               })
             })
         //}
-      //})
+    })
   )
 });
