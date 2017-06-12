@@ -81,8 +81,8 @@ self.addEventListener('fetch', function(event) {
         }
         if(event.request.url.includes("https://trim-mode-139918.firebaseio.com")){
           if(!navigator.onLine){
-                console.log("mira")
                 caches.match(event.request).then(function (response) {
+                   console.log("mira")
                    return response
                 })
 
