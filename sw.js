@@ -76,12 +76,18 @@ self.addEventListener('fetch', function(event) {
   console.log(event.request.method);
   event.respondWith(
       caches.open(CURRENT_CACHES).then(function(cache) {
+        if(event.request.url.includes("chabot")){
+           return fetch(event.request)
+        }
         if(event.request.url.includes("https://trim-mode-139918.firebaseio.com")){
           if(!navigator.onLine){
                 console.log("mira")
-                return cache.add(event.request)
+                caches.match(event.request).then(function (response) {
+                   return response
+                })
 
           }else{
+              cache.add(event.request)
               return fetch(event.request)
           }
 
