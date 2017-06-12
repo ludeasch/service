@@ -87,8 +87,10 @@ self.addEventListener('fetch', function(event) {
                 })
 
           }else{
-              cache.add(event.request)
-              return fetch(event.request)
+              return fetch(event.request).then(function(response) {
+                cache.put(event.request, response.clone());
+                return response;
+              })
           }
 
         }else{
