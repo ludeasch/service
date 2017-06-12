@@ -81,15 +81,15 @@ self.addEventListener('fetch', function(event) {
         }
         if(event.request.url.includes("https://trim-mode-139918.firebaseio.com")){
           if(!navigator.onLine){
-                caches.match(event.request).then(function (response) {
-                   console.log("mira")
-                   return response
+                return caches.match(event.request).then(function (response) {
+                  return response || fetch(event.request).then(function(response) {
+                    cache.put(event.request, response.clone());
+                    return response;
                 })
 
           }else{
-              return fetch(event.request).then(function(response) {
-                cache.put(event.request, response.clone());
-                return response;
+              cache.add(event.request);
+              return event.request;
               })
           }
 
