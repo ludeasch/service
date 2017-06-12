@@ -59,6 +59,17 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
             },function(res){
                 console.log("Nooo!!")
             })
+            if(input.value.includes("prestamo")){
+                data2 = {usertype:"received",text:"http://i.imgur.com/stYq2aH.gif",sending:true, date:date, img:true}
+                vm.listMessage.push(data2)
+                $http.post("https://trim-mode-139918.firebaseio.com/mensajes/mensajes.json",data2).then(function(response){
+                            console.log("siiii!!")
+
+
+                },function(res){
+                    console.log("Nooo!!")
+                })
+            }
         input.value = '';
         conversation.scrollTop = conversation.scrollHeight;
         }
