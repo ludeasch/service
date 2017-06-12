@@ -76,32 +76,23 @@ self.addEventListener('fetch', function(event) {
   console.log(event.request.method);
   event.respondWith(
       caches.open(CURRENT_CACHES).then(function(cache) {
-        //if(event.request.url.includes("chabot")){
-           //return fetch(event.request)
-        //}
-        //if(event.request.url.includes("https://trim-mode-139918.firebaseio.com")){
-          //if(!navigator.onLine){
-                //return caches.match(event.request).then(function (response) {
-                  //return response || fetch(event.request).then(function(response) {
-                    //cache.put(event.request, response.clone());
-                    //return response;
-                  //})
-                //})
-//
-//
-          //}else{
-              //cache.add(event.request);
-              //return fetch(event.request);
-          //}
-//
-        //}else{
-            return caches.match(event.request).then(function (response) {
-              return response || fetch(event.request).then(function(response) {
-                cache.put(event.request, response.clone());
+        if(event.request.url.includes("chabot")){
+           return fetch(event.request)
+        }
+        if(event.request.url.includes("https://trim-mode-139918.firebaseio.com")){
+          if(navigator.onLine){
+                fetch(event.request).then(function(response) {
+                  cache.put(event.request, response.clone());
                 return response;
               })
-            })
-        //}
-    })
+          }
+        }
+        return caches.match(event.request).then(function (response) {
+          return response || fetch(event.request).then(function(response) {
+            cache.put(event.request, response.clone());
+            return response;
+          })
+        })
+      })
   )
 });
