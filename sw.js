@@ -47,7 +47,6 @@ self.addEventListener('install', function(event) {
         [
            'sw.js',
            'scripts/main.js',
-           'index.html',
            'styles/index.css',
         ]
       );
@@ -76,6 +75,14 @@ self.addEventListener('fetch', function(event) {
   console.log(event.request.method);
   event.respondWith(
       caches.open(CURRENT_CACHES).then(function(cache) {
+        if(event.request.url.includes("index")){
+          if(!navigator.onLine){
+            return caches.match(event.request)
+          }else{
+            cache.add(event.request)
+            return fetch(event.request)
+          }
+        }
         if(event.request.url.includes("https://trim-mode-139918.firebaseio.com/.json?print=pretty")){
           if(!navigator.onLine){
                 console.log("mira")
