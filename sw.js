@@ -98,9 +98,9 @@ self.addEventListener('fetch', function(event) {
               return response || fetch(event.request).then(function(response) {
                 cache.add(event.request, response.clone());
                 return response;
-              })
-            })
+              }).cacht(function(r){console.log(r)})
+            }).cacht(function(r){console.log(r)})
         }
-      })
+      }).cacht(function(r){console.log(r)})
   )
 });
