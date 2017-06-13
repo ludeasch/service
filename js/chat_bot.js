@@ -43,7 +43,7 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
             //conversation.appendChild(message);
             //vm.animateMessage(message);
             var date = new Date().valueOf()
-            data = {usertype:"sent",text:input.value,sending:true, date:date, img:null}
+            data = {usertype:"sent",text:input.value,sending:true, date:date}
             if(vm.online()){
                 vm.listMessage.push(data)
 
@@ -59,7 +59,7 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
             },function(res){
                 console.log("Nooo!!")
             })
-            datac = {usertype:"received",text:null,sending:true, date:date, img:"https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif"}
+            datac = {usertype:"received",sending:true, date:date, img:"https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif"}
             vm.listMessage.push(datac)
             $http.post("https://trim-mode-139918.firebaseio.com/mensajes/mensajes.json",data2).then(function(response){
                         console.log("siiii!!")
@@ -69,7 +69,7 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
                         console.log("Nooo!!")
             })
             if(input.value.includes("prestamo")){
-                data2 = {usertype:"received",text:"Cuanto dinero quieres?",sending:true, date:date, img:null}
+                data2 = {usertype:"received",text:"Cuanto dinero quieres?",sending:true, date:date}
                 vm.listMessage.push(data2)
                 $http.post("https://trim-mode-139918.firebaseio.com/mensajes/mensajes.json",data2).then(function(response){
                             console.log("siiii!!")
