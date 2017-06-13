@@ -61,7 +61,7 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
             })
             datac = {usertype:"received",sending:true, date:date, img:"https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif"}
             vm.listMessage.push(datac)
-            $http.post("https://trim-mode-139918.firebaseio.com/mensajes/mensajes.json",data2).then(function(response){
+            $http.post("https://trim-mode-139918.firebaseio.com/mensajes/mensajes.json",datac).then(function(response){
                         console.log("siiii!!")
 
 
