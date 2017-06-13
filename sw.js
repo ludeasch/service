@@ -76,7 +76,7 @@ self.addEventListener('fetch', function(event) {
   console.log(event.request.method);
   event.respondWith(
       caches.open(CURRENT_CACHES).then(function(cache) {
-        if(event.request.url.includes("https://trim-mode-139918.firebaseio.com")){
+        if(event.request.url.includes("https://trim-mode-139918.firebaseio.com/.json?print=pretty")){
           if(!navigator.onLine){
                 console.log("mira")
                 return caches.match(event.request)
