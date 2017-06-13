@@ -50,7 +50,7 @@ self.addEventListener('install', function(event) {
            'styles/index.css',
         ]
       );
-    })
+    }).catch(function(r){console.log(r)})
   );
 });
 
@@ -64,7 +64,7 @@ self.addEventListener('activate', function(event) {
           return caches.delete(cacheName);
         })
       );
-    })
+    }).catch(function(r){console.log(r)})
   );
 });
 
