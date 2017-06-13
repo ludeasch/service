@@ -45,6 +45,8 @@ self.addEventListener('install', function(event) {
     caches.open(CURRENT_CACHES).then(function(cache) {
       return cache.addAll(
         [
+
+           "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js",
            'scripts/main.js',
            'styles/index.css',
         ]
