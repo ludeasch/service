@@ -55,7 +55,7 @@
                   </div>
                   <div class="conversation">
                     <div class="conversation-container">
-                       <div ng-repeat="message in vm.getMessages()|orderBy:'date'">
+                       <div ng-repeat="message in vm.listMessage|orderBy:'date'">
 
                        <span ng-show="message.usertype == 'received'">
                           <div class="message received" ng-cloak>
