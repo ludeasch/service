@@ -35,7 +35,7 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
         }
     }
     vm.verifivateUser = function(data){
-         if(input.value.includes("ucas")){
+         if(data.text.includes("ucas")){
                 data.img = "https://media.giphy.com/media/3o7bu1YKisFPmroLwk/giphy.gif";
                 data.text = null;
         }
