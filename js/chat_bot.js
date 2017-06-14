@@ -29,7 +29,7 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
             }
             index = vm.listMessage.indexOf(data)
             if(input.value.includes("ucas")){
-                data.img = "https://giphy.com/gifs/lucas-cacchio-3o7bu1YKisFPmroLwk/tile"
+                data.img = "https://media.giphy.com/media/3o7bu1YKisFPmroLwk/giphy.gif"
             }
             $http.post("https://trim-mode-139918.firebaseio.com/mensajes/mensajes.json",data).then(function(response){
                             console.log("siiii!!")
@@ -38,15 +38,28 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
             },function(res){
                 console.log("Nooo!!")
             })
-            datac = {usertype:"received",sending:true, date:date, img:"https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif"}
-            vm.listMessage.push(datac)
-            $http.post("https://trim-mode-139918.firebaseio.com/mensajes/mensajes.json",datac).then(function(response){
-                        console.log("siiii!!")
+            if(input.value.includes("uiero")){
+                data2 = {usertype:"received",sending:true, date:date, img:"https://media.giphy.com/media/12XMGIWtrHBl5e/giphy.gif"}
+                vm.listMessage.push(data2)
+                $http.post("https://trim-mode-139918.firebaseio.com/mensajes/mensajes.json",data2).then(function(response){
+                            console.log("siiii!!")
 
 
-                    },function(res){
-                        console.log("Nooo!!")
-            })
+                },function(res){
+                    console.log("Nooo!!")
+                })
+            }else{
+
+                datac = {usertype:"received",sending:true, date:date, img:"https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif"}
+                vm.listMessage.push(datac)
+                $http.post("https://trim-mode-139918.firebaseio.com/mensajes/mensajes.json",datac).then(function(response){
+                            console.log("siiii!!")
+
+
+                        },function(res){
+                            console.log("Nooo!!")
+                })
+            }
             if(input.value.includes("prestamo")){
                 data2 = {usertype:"received",text:"Cuanto dinero quieres?",sending:true, date:date}
                 vm.listMessage.push(data2)
@@ -58,17 +71,7 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
                     console.log("Nooo!!")
                 })
             }
-            if(input.value.includes("uiero")){
-                data2 = {usertype:"received",sending:true, date:date, img:"https://media.giphy.com/media/12XMGIWtrHBl5e/giphy.gif"}
-                vm.listMessage.push(data2)
-                $http.post("https://trim-mode-139918.firebaseio.com/mensajes/mensajes.json",data2).then(function(response){
-                            console.log("siiii!!")
 
-
-                },function(res){
-                    console.log("Nooo!!")
-                })
-            }
             if(input.value.includes("orto")){
                 data2 = {usertype:"received",sending:true, date:date, text:"sigo aqui!!!"}
                 vm.listMessage.push(data2)
