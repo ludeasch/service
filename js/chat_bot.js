@@ -49,6 +49,7 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
 
     }
     vm.verificationBot = function(input){
+        var date = new Date().valueOf()
         if(input.value.includes("ucas")){
             data2 = {usertype:"received",sending:true, date:date, img:"https://media.giphy.com/media/12XMGIWtrHBl5e/giphy.gif"}
             vm.listMessage.push(data2)
