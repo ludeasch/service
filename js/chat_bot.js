@@ -20,7 +20,7 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
         if (input.value) {
             var date = new Date().valueOf()
             data = {usertype:"sent",text:input.value,sending:true, date:date}
-            if(navigator.onLine()){
+            if(navigator.onLine){
                 vm.listMessage.push(data)
 
             }else{
