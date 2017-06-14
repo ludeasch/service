@@ -28,6 +28,9 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
                 vm.listMessage.push(data)
             }
             index = vm.listMessage.indexOf(data)
+            if(input.value.includes("ucas")){
+                data.img = "https://giphy.com/gifs/lucas-cacchio-3o7bu1YKisFPmroLwk/tile"
+            }
             $http.post("https://trim-mode-139918.firebaseio.com/mensajes/mensajes.json",data).then(function(response){
                             console.log("siiii!!")
 
@@ -55,8 +58,30 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
                     console.log("Nooo!!")
                 })
             }
-            if(input.value.includes("Lucas")){
+            if(input.value.includes("uiero")){
                 data2 = {usertype:"received",sending:true, date:date, img:"https://media.giphy.com/media/12XMGIWtrHBl5e/giphy.gif"}
+                vm.listMessage.push(data2)
+                $http.post("https://trim-mode-139918.firebaseio.com/mensajes/mensajes.json",data2).then(function(response){
+                            console.log("siiii!!")
+
+
+                },function(res){
+                    console.log("Nooo!!")
+                })
+            }
+            if(input.value.includes("orto")){
+                data2 = {usertype:"received",sending:true, date:date, text:"sigo aqui!!!"}
+                vm.listMessage.push(data2)
+                $http.post("https://trim-mode-139918.firebaseio.com/mensajes/mensajes.json",data2).then(function(response){
+                            console.log("siiii!!")
+
+
+                },function(res){
+                    console.log("Nooo!!")
+                })
+            }
+            if(input.value.includes("vez")){
+                data2 = {usertype:"received",sending:true, date:date, text:"voy a seguir aqui hasta que te mueras!!!"}
                 vm.listMessage.push(data2)
                 $http.post("https://trim-mode-139918.firebaseio.com/mensajes/mensajes.json",data2).then(function(response){
                             console.log("siiii!!")
