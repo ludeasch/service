@@ -35,10 +35,6 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
         }
     }
     vm.verifivateUser = function(data){
-         if(data.text.includes("ucas")){
-                data.img = "https://media.giphy.com/media/3o7bu1YKisFPmroLwk/giphy.gif";
-                data.text = null;
-        }
         $http.post("https://trim-mode-139918.firebaseio.com/mensajes/mensajes.json",data).then(function(response){
                         console.log("siiii!!")
 
@@ -46,6 +42,17 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
             },function(res){
                 console.log("Nooo!!")
         })
+        if(data.text.includes("ucas")){
+                data.img = "https://media.giphy.com/media/3o7bu1YKisFPmroLwk/giphy.gif";
+                data.text = null;
+                $http.post("https://trim-mode-139918.firebaseio.com/mensajes/mensajes.json",data).then(function(response){
+                        console.log("siiii!!")
+
+
+                },function(res){
+                    console.log("Nooo!!")
+            })
+        }
 
     }
     vm.verificationBot = function(input){
