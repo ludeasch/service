@@ -2,7 +2,6 @@
 ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', '$interval', '$q', function ($scope, $sce,$http, $timeout, $interval, $q) {
     var vm = this;
     var today = new Date().valueOf()
-    var lastOnlineRef = firebase.database().ref('messages/lastOnline');
     // ask for username first time only
     var username = localStorage.getItem("username");
     if (!username) {
@@ -24,18 +23,6 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
     }
     vm.getMessages()
 
-    var connectedRef = firebase.database().ref('.info/connected');
-    connectedRef.on('value', function(snap) {
-      if (snap.val() === false) {
-        // We're connected (or reconnected)! Do anything here that should happen only if online (or on reconnect)
-
-        // add this device to my connections lis
-
-        // when I disconnect, update the last time I was seen online
-        lastOnlineRef.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP);
-      }
-    });
-
     function saveMessage (username, text, img) {
         var data = {
             username: username,
@@ -48,6 +35,7 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
 
         }else{
             firebase.database().ref('messages').onDisconnect().set(data)
+            vm.listMessage.push(data)
         }
     };
 
