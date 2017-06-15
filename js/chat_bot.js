@@ -53,7 +53,7 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
 
 
     firebase.database().ref("messages").on("value", function(snap){
-        if (navigatior.onLine){
+        if (navigator.onLine){
             vm.getMessages()
         }
         $timeout(function(){
