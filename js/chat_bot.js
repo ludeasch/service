@@ -22,6 +22,19 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
 
 
     }
+    vm.getMessages()
+
+    var connectedRef = firebase.database().ref('.info/connected');
+    connectedRef.on('value', function(snap) {
+      if (snap.val() === false) {
+        // We're connected (or reconnected)! Do anything here that should happen only if online (or on reconnect)
+
+        // add this device to my connections lis
+
+        // when I disconnect, update the last time I was seen online
+        lastOnlineRef.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP);
+      }
+    });
 
     function saveMessage (username, text, img) {
         var data = {
@@ -30,7 +43,7 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
         }
         if (text) { data.text = text }
         if (img) { data.img = img }
-        if (navigatior.onLine){
+        if (navigator.onLine){
             firebase.database().ref('messages').push(data);
 
         }else{
@@ -38,20 +51,16 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
         }
     };
 
+
     firebase.database().ref("messages").on("value", function(snap){
-        if (snap.val() == true){
-            console.log(snap.val())
-            $timeout(function(){
-                vm.listMessage = Object.keys(snap.val()).map(function(key) {
-                    return snap.val()[key]
-                })
-            }, 1);
-        }else{
-            console.log(lastOnlineRef.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP))
-             vm.listMessage = Object.keys(lastOnlineRef.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP)).map(function(key) {
-                    return lastOnlineRef.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP)[key]
-                })
+        if (navigatior.onLine){
+            vm.getMessages()
         }
+        $timeout(function(){
+            vm.listMessage = Object.keys(snap.val()).map(function(key) {
+                return snap.val()[key]
+            })
+        }, 1);
     })
 
     vm.newMessage = function(input) {
