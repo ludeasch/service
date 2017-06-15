@@ -98,20 +98,19 @@ function subscribeUser() {
 }
 
 function initialiseUI() {
+  swRegistration.pushManager.getSubscription()
+  .then(function(subscription) {
+    isSubscribed = !(subscription === null);
+
+    console.log(subscription)
     if (isSubscribed) {
       // TODO: Unsubscribe user
     } else {
 
       subscribeUser();
     }
-
-  // Set the initial subscription value
-  swRegistration.pushManager.getSubscription()
-  .then(function(subscription) {
-    isSubscribed = !(subscription === null);
-
-    console.log(subscription)
     updateSubscriptionOnServer(subscription);
+    })
 
     if (isSubscribed) {
       console.log('User IS subscribed.');
@@ -119,8 +118,9 @@ function initialiseUI() {
       console.log('User is NOT subscribed.');
     }
 
+  // Set the initial subscription value
+
     //updateBtn();
-  });
 }
 
 if ('serviceWorker' in navigator && 'PushManager' in window) {
