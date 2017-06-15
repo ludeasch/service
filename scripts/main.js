@@ -88,23 +88,20 @@ function subscribeUser() {
 
     isSubscribed = true;
 
-    updateBtn();
+    //updateBtn();
   })
   .catch(function(err) {
     console.log('Failed to subscribe the user: ', err);
-    updateBtn();
+    //updateBtn();
   });
 }
 
 function initialiseUI() {
-  //pushButton.addEventListener('click', function() {
-  //  pushButton.disabled = true;
-  //  if (isSubscribed) {
-  //    // TODO: Unsubscribe user
-  //  } else {
-  //    subscribeUser();
-  //  }
-  //});
+    if (isSubscribed) {
+      // TODO: Unsubscribe user
+    } else {
+      subscribeUser();
+    }
 
   // Set the initial subscription value
   swRegistration.pushManager.getSubscription()
@@ -120,7 +117,7 @@ function initialiseUI() {
       console.log('User is NOT subscribed.');
     }
 
-    updateBtn();
+    //updateBtn();
   });
 }
 
@@ -131,25 +128,13 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
   .then(function(swReg) {
     console.log('Service Worker is registered', swReg);
 
-    //swRegistration = swReg;
+    swRegistration = swReg;
     //initialiseUI();
 
   })
   .catch(function(error) {
     console.error('Service Worker Error', error);
   });
-  if (navigator.onLine){
-     caches.open("prefetch-cache-v2").then(function(cache) {
-       cache.matchAll('https://trim-mode-139918.firebaseio.com/').then(function(response) {
-              response.forEach(function(element, index, array) {
-                console.log(element)
-                console.log("request offline")
-                fetch(element)
-                cache.delete(element);
-              });
-      })
-   })
-  }
 } else {
   console.warn('Push messaging is not supported');
   pushButton.textContent = 'Push Not Supported';
