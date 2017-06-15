@@ -56,6 +56,14 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
             saveMessage(username, input.value);
             vm.verificateUser(input.value);
             vm.verificationBot(input)
+            $http.get("http://localhost:3000/server/"+input.value).then(function(response){
+
+                console.log("nice")
+
+
+            })
+
+
             input.value = '';
         }
     }
