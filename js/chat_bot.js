@@ -1,60 +1,49 @@
 
 ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', '$interval', '$q', function ($scope, $sce,$http, $timeout, $interval, $q) {
     var vm = this;
-    /* Time */
     var today = new Date().valueOf()
-
-    vm.initial = function(){
-                    $http.get("https://trim-mode-139918.firebaseio.com/.json?print=pretty").then(function(response){
-
-                            vm.listMessage = Object.keys(response.data.mensajes.mensajes).map(function(key) {
-                                                return response.data.mensajes.mensajes[key]
-                            })
-
-
-                    })
-
-
+    
+    // ask for username first time only
+    var username = localStorage.getItem("username");
+    if (!username) {
+        username = prompt("Tu nombre?")
+        localStorage.setItem("username", username);
     }
+    vm.username = username;
+    
+
+    function saveMessage (username, text, img) {
+        var data = {
+            username: username,
+            date: new Date().valueOf()
+        }
+        if (text) { data.text = text }
+        if (img) { data.img = img }
+        firebase.database().ref('messages').push(data);
+    };
+
+    firebase.database().ref("messages").on("value", function(snap){
+        $timeout(function(){
+            vm.listMessage = Object.keys(snap.val()).map(function(key) {
+                return snap.val()[key]
+            })
+        }, 1);
+    })
+
     vm.newMessage = function(input) {
         if (input.value) {
-            var date = new Date().valueOf()
-            data = {usertype:"sent",text:input.value,sending:true, date:date}
-            if(navigator.onLine){
-                vm.listMessage.push(data)
-
-            }else{
-                data.sending = false
-                vm.listMessage.push(data)
-            }
-            index = vm.listMessage.indexOf(data)
-            vm.verifivateData(input, data)
-
-        input.value = '';
-        input.value = '';
+            saveMessage(username, input.value);
+            vm.verifivateUser(input.value);
+            input.value = '';
         }
     }
-    vm.verifivateUser = function(data){
-        $http.post("https://trim-mode-139918.firebaseio.com/mensajes/mensajes.json",data).then(function(response){
-                        console.log("siiii!!")
 
-
-            },function(res){
-                console.log("Nooo!!")
-        })
-        if(data.text.includes("ucas")){
-                data.img = "https://media.giphy.com/media/3o7bu1YKisFPmroLwk/giphy.gif";
-                data.text = null;
-                $http.post("https://trim-mode-139918.firebaseio.com/mensajes/mensajes.json",data).then(function(response){
-                        console.log("siiii!!")
-
-
-                },function(res){
-                    console.log("Nooo!!")
-            })
+    vm.verifivateUser = function(text){
+        if(text.includes("ucas")){
+            saveMessage(username, undefined, "https://media.giphy.com/media/3o7bu1YKisFPmroLwk/giphy.gif")
         }
-
     }
+    
     vm.verificationBot = function(input){
         var date = new Date().valueOf()
         if(input.value.includes("ucas")){
@@ -131,7 +120,4 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
         }
 
     }
-
-
-    vm.initial()
 }])
