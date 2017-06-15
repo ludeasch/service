@@ -67,22 +67,20 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
     }
 
     vm.verificationBot = function(input){
-        if(username == "moni"){
-            if(input.value.includes("ucas")){
-                saveMessage("moni", undefined, "https://media.giphy.com/media/12XMGIWtrHBl5e/giphy.gif")
-            }else{
-                saveMessage("moni", undefined, "https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif")
-            }
-            if(input.value.includes("prestamo")){
-                saveMessage("moni", "Cuanto dinero quieres?", undefined)
-            }
+        if(input.value.includes("ucas")){
+            saveMessage("moni", undefined, "https://media.giphy.com/media/12XMGIWtrHBl5e/giphy.gif")
+        }else{
+            saveMessage("moni", undefined, "https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif")
+        }
+        if(input.value.includes("prestamo")){
+            saveMessage("moni", "Cuanto dinero quieres?", undefined)
+        }
 
-            if(input.value.includes("orto")){
-                saveMessage("moni", "sigo aqui!!!", undefined)
-            }
-            if(input.value.includes("vez")){
-                saveMessage("moni", "voy a seguir aqui hasta que te mueras!!!", undefined)
-            }
+        if(input.value.includes("orto")){
+            saveMessage("moni", "sigo aqui!!!", undefined)
+        }
+        if(input.value.includes("vez")){
+            saveMessage("moni", "voy a seguir aqui hasta que te mueras!!!", undefined)
         }
 
 
