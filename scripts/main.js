@@ -68,10 +68,11 @@ function updateSubscriptionOnServer(subscription) {
     document.querySelector('.js-subscription-details');
 
   if (subscription) {
-    subscriptionJson.textContent = JSON.stringify(subscription);
-    subscriptionDetails.classList.remove('is-invisible');
+    console.log(JSON.stringify(subscription));
+    //subscriptionDetails.classList.remove('is-invisible');
   } else {
-    subscriptionDetails.classList.add('is-invisible');
+    //subscriptionDetails.classList.add('is-invisible');
+    console.log("no funciono")
   }
 }
 
@@ -100,6 +101,7 @@ function initialiseUI() {
     if (isSubscribed) {
       // TODO: Unsubscribe user
     } else {
+
       subscribeUser();
     }
 
