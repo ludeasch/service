@@ -72,7 +72,7 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
         }
     }
 
-    vm.verifivateUser = function(text){
+    vm.verificateUser = function(text){
         if(text.includes("ucas")){
             saveMessage(username, undefined, "https://media.giphy.com/media/3o7bu1YKisFPmroLwk/giphy.gif")
         }
