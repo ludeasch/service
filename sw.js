@@ -49,6 +49,7 @@ self.addEventListener('install', function(event) {
            "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js",
            'scripts/main.js',
            'styles/index.css',
+           'images/icon.png',
            "https://media.giphy.com/media/3o7bu1YKisFPmroLwk/giphy.gif",
            "https://media.giphy.com/media/12XMGIWtrHBl5e/giphy.gif",
            "https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif"
