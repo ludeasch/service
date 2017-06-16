@@ -396,7 +396,11 @@ body {
 .conversation-compose .send .circle i {
   font-size: 24px;
   margin-left: 5px;
-  height: calc(100vh - 55px);
+  height: 30px;
+  background-image: url(arrow.png);
+  width: 30px;
+  background-position: 0px 2px;
+  background-repeat: no-repeat;
 }
 
 /* Small Screens */

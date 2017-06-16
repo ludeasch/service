@@ -54,7 +54,7 @@
                     </div>
                   </div>
                   <div class="conversation">
-                    <div class="conversation-container">
+                    <div id="chatbody" class="conversation-container">
                        <div ng-repeat="message in vm.listMessage|orderBy:'date'">
 
                        <span ng-show="message.username != vm.username">
