@@ -2,7 +2,7 @@
 ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', '$interval', '$q', function ($scope, $sce,$http, $timeout, $interval, $q) {
     var vm = this;
     var today = new Date().valueOf()
-    
+
     // ask for username first time only
     var username = localStorage.getItem("username");
     if (!username) {
@@ -10,7 +10,7 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
         localStorage.setItem("username", username);
     }
     vm.username = username;
-    
+
     vm.getMessages = function(update){
         $http.get("https://trim-mode-139918.firebaseio.com/.json?print=pretty").then(function(response){
             var data = Object.keys(response.data.messages).map(function(key) {
@@ -39,7 +39,7 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
             firebase.database().ref('messages').onDisconnect().set(data)
             vm.listMessage.push(data)
         }
-        
+
         $timeout(function(){
             //scroll chat
             var div = document.getElementById("chatbody");
@@ -64,17 +64,18 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
             saveMessage(username, input.value);
             vm.verificateUser(input.value);
             vm.verificationBot(input)
-            $http.get("http://localhost:3000/server/"+input.value).then(function(response){
-                console.log("nice")
-            })
+            //$http.get("http://localhost:3000/server/"+input.value).then(function(response){
+            //    console.log("nice")
+            //})
             input.value = '';
         }
     }
 
     vm.verificateUser = function(text){
-        return
-        if(text.includes("ucas")){
-            saveMessage(username, undefined, "https://media.giphy.com/media/3o7bu1YKisFPmroLwk/giphy.gif")
+        if(vm.username=="lucas"){
+            if(text.includes("ucas")){
+                saveMessage(username, undefined, "https://media.giphy.com/media/3o7bu1YKisFPmroLwk/giphy.gif")
+            }
         }
     }
 
@@ -87,24 +88,24 @@ ChatBotApp.controller('ChatController', ['$scope', '$sce' ,'$http', '$timeout', 
                 }, 700);
             }else{
                 // cat
-                $timeout(function(){                
+                $timeout(function(){
                     saveMessage("moni", undefined, "https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif")
-                }, 700);   
+                }, 700);
             }
 
             if(input.value.includes("prestamo")){
-                $timeout(function(){                
+                $timeout(function(){
                     saveMessage("moni", "Cuanto dinero quieres?", undefined)
                 }, 1400)
-                
+
             } else if( input.value.includes("orto") ){
                 $timeout(function(){
                     saveMessage("moni", "sigo aqui!!!", undefined)
-                }, 1400)                
+                }, 1400)
             } else if( input.value.includes("vez") ){
-                $timeout(function(){    
+                $timeout(function(){
                     saveMessage("moni", "voy a seguir aqui hasta que te mueras!!!", undefined)
-                }, 1400)            
+                }, 1400)
             }
         }
     }
